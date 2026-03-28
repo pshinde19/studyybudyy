@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root {
+  
+  line-height: 1.5;
+  font-weight: 400;
+  /* color-scheme: light dark; */
+  color: #202020;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --color-red-50: oklch(97.1% .013 17.38);
+  --color-red-100: oklch(93.6% .032 17.717);
+  --color-red-400: #ff6467;
+  --color-red-500: #fb2c36;
+  --color-orange-50: #fff7ed;
+  --color-orange-100: #ffedd4;
+  --color-orange-600: oklch(64.6% .222 41.116);
+  --color-yellow-100: #fef9c2;
+  --color-green-50: #f0fdf4;
+  --color-green-100: oklch(96.2% .044 156.743);
+  --color-green-600: oklch(62.7% .194 149.214);
+  --color-cyan-50: oklch(98.4% .019 200.873);
+  --color-cyan-100: oklch(95.6% .045 203.388);
+  --color-cyan-200: oklch(91.7% .08 205.041);
+  --color-cyan-400: oklch(78.9% .154 211.53);
+  --color-cyan-500: oklch(71.5% .143 215.221);
+  --color-cyan-600: oklch(60.9% .126 221.723);
+  --color-cyan-800: oklch(45% .085 224.283);
+  --color-blue-50: oklch(97% .014 254.604);
+  --color-blue-100: oklch(93.2% .032 255.585);
+  --color-blue-400: oklch(70.7% .165 254.624);
+  --color-blue-500: oklch(62.3% .214 259.815);
+  --color-blue-600: oklch(54.6% .245 262.881);
+  --color-slate-50: oklch(98.4% .003 247.858);
+  --color-slate-100: oklch(96.8% .007 247.896);
+  --color-slate-200: oklch(92.9% .013 255.508);
+  --color-slate-300: oklch(86.9% .022 252.894);
+  --color-slate-400: oklch(70.4% .04 256.788);
+  --color-slate-500: oklch(55.4% .046 257.417);
+  --color-slate-600: oklch(44.6% .043 257.281);
+  --color-slate-700: oklch(37.2% .044 257.287);
+  --color-slate-800: oklch(27.9% .041 260.031);
+}
+
+*,::after,::before{
+  margin:0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Funnel Sans", sans-serif;
+}

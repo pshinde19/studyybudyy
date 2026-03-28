@@ -1,0 +1,3 @@
+{
+  "template": "You are a validation assistant.\n\nCheck the user question.\n\nReturn JSON:\n{\n  \"is_valid\": true/false,\n  \"is_relevant\": true/false,\n  \"message\": \"short reason\"\n}\n\nConsider:\n- valid = meaningful question\n- relevant = related to given document\n\nDOCUMENT NAME:\n{filename}\n\nQUESTION:\n{query}"
+}

@@ -1,0 +1,324 @@
+/* src/pages/ErrorPage.module.css */
+
+/* Container and Layout */
+.errorContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  position: relative;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Background Decorative Elements */
+.bgBlob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.blobOne {
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  top: -150px;
+  right: -150px;
+  animation: blobAnimation 8s ease-in-out infinite;
+}
+
+.blobTwo {
+  width: 250px;
+  height: 250px;
+  background: linear-gradient(135deg, #9b59b6, #8e44ad);
+  bottom: -100px;
+  left: -100px;
+  animation: blobAnimation 10s ease-in-out infinite 2s;
+}
+
+@keyframes blobAnimation {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+/* Content Wrapper */
+.contentWrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Card */
+.errorCard {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  padding: 3rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.errorCard:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Status Code Icon */
+.statusIconContainer {
+  margin-bottom: 2rem;
+  display: inline-block;
+}
+
+.statusIcon {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(229, 57, 53, 0.2), rgba(211, 47, 47, 0.2));
+  border: 2px solid rgba(229, 57, 53, 0.3);
+  margin: 0 auto 1.5rem;
+}
+
+.statusCode {
+  font-size: 4rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -2px;
+}
+
+/* Headings */
+.errorTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 1.5rem 0 1rem;
+  letter-spacing: -0.5px;
+}
+
+@media (max-width: 768px) {
+  .errorTitle {
+    font-size: 1.8rem;
+  }
+}
+
+.statusText {
+  font-size: 1.2rem;
+  color: #b0b8c1;
+  margin: 1rem 0 1.5rem;
+  font-weight: 500;
+}
+
+/* Error Description */
+.errorDescription {
+  font-size: 1rem;
+  color: #a0a0a0;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Error Details Box */
+.errorDetailsBox {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.errorDetailsBox p {
+  color: #909090;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  margin: 0;
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+/* Button Group */
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+@media (max-width: 640px) {
+  .buttonGroup {
+    flex-direction: column;
+  }
+}
+
+/* Primary Button */
+.primaryBtn {
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: #ffffff;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.primaryBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2980b9, #1a5276);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.primaryBtn:hover::before {
+  left: 0;
+}
+
+.primaryBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+}
+
+.primaryBtn:active {
+  transform: translateY(0);
+}
+
+/* Secondary Button */
+.secondaryBtn {
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+.secondaryBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+.secondaryBtn:active {
+  transform: scale(0.98);
+}
+
+/* Footer Message */
+.footerMessage {
+  color: #808080;
+  font-size: 0.875rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .errorCard {
+    padding: 2rem;
+  }
+
+  .statusCode {
+    font-size: 3rem;
+  }
+
+  .statusIcon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .errorTitle {
+    font-size: 1.8rem;
+  }
+
+  .statusText {
+    font-size: 1rem;
+  }
+
+  .errorDescription {
+    font-size: 0.95rem;
+  }
+
+  .buttonGroup {
+    gap: 0.75rem;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .errorContainer {
+    padding: 1rem;
+  }
+
+  .errorCard {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+
+  .statusCode {
+    font-size: 2.5rem;
+  }
+
+  .errorTitle {
+    font-size: 1.5rem;
+    margin: 1rem 0 0.75rem;
+  }
+
+  .statusText {
+    font-size: 0.95rem;
+    margin: 0.75rem 0 1rem;
+  }
+
+  .errorDescription {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .footerMessage {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+  }
+}

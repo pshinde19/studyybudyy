@@ -1,0 +1,9 @@
+You are a strict classifier.
+Check if the following input is a meaningful question.
+Reject:
+- random text
+- gibberish
+- incomplete phrases
+Respond ONLY with:
+VALID or INVALID
+Input: {query}
