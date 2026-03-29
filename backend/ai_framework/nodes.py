@@ -96,7 +96,9 @@ def validate_question(state: GraphState):
     response=run_llm(prompt)
     result = response.choices[0].message.content.strip()
     is_valid = result.upper().startswith("VALID")
-    return {"is_valid": is_valid}
+    result={"is_valid": is_valid}
+    return  result
+
 
 def thinking_steps(state: GraphState):
     # print('state["query"]',state["query"])
@@ -116,12 +118,10 @@ def thinking_steps(state: GraphState):
     'messageid':state["messageId"]
     }
     return {
-        "mykey":"thinking",
         "thinking": result
     }
 
 def generate_answer(state: GraphState):
-    print('generate_answer')
     query = state["query"]
     user_id =state['user_id'] 
     user_name =state['user_name']  
@@ -179,7 +179,7 @@ def generate_answer(state: GraphState):
     'total_tokens':response.usage.total_tokens,
     'messageid':state["messageId"]
     }
-    return {"documentAnswer":result,"mykey":"documentAnswer"}
+    return {"documentAnswer":result}
 
 def websearch(state: GraphState):
     file_path = os.path.join(parent_dir,'prompts', 'web_search.txt')
@@ -201,7 +201,7 @@ def websearch(state: GraphState):
     'total_tokens':response.usage.total_tokens,
     'messageid':state["messageId"]
     }
-    return {"websearch":result,"mykey":"websearch"}
+    return {"websearch":result}
 
 def suggest_questions(state: GraphState):
     file_path = os.path.join(parent_dir,'prompts', 'followups.txt')
@@ -223,10 +223,8 @@ def suggest_questions(state: GraphState):
     'total_tokens':response.usage.total_tokens,
     'messageid':state["messageId"]
     }
-    return {"suggest_questions":result,"mykey":"suggest_questions"}
+    return {"suggest_questions":result}
 
 # def completedProcess(state: GraphState):
 #     print('completedprocess')
 #     return {"key":"completed","data":""}
-# x=GraphState()
-# completedprocess(x)
