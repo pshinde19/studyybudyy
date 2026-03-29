@@ -1,0 +1,13 @@
+Follow this plan:
+{thinking}
+Answer ONLY from context.
+CONTEXT:
+{context}
+
+QUESTION:{query}
+Use citations like [filename, pg X]
+
+
+
+
+

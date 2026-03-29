@@ -7,12 +7,12 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import fitz  # PyMuPDF
 from groq import Groq
-import chromadb
-from chromadb.utils import embedding_functions
+# import chromadb
+# from chromadb.utils import embedding_functions
 from flask_socketio import SocketIO
 from graph.builder import build_graph
 from graph.callbacks import SocketIOCallbackHandler
-
+from ai_framework.nodes import chroma_client,google_ef
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
@@ -28,20 +28,20 @@ app.config.update(
     SESSION_COOKIE_SECURE=False,   # Set to True if using HTTPS
 )
 
-# Gemini API Configuration
-# Note: The environment provides the API key at runtime via an empty string assignment logic
-apiKey = "" 
-# openaikey=""
-grokapikey=""
-# CORRECT INITIALIZATION for gemini-3-flash-preview
-groq_client = Groq(
-    api_key=grokapikey
-)
+# # Gemini API Configuration
+# # Note: The environment provides the API key at runtime via an empty string assignment logic
+# apiKey = "" 
+# # openaikey=""
+# grok_api_key=os.getenv("GROQ_API_KEY")
+# # CORRECT INITIALIZATION for gemini-3-flash-preview
+# groq_client = Groq(
+#     api_key=grok_api_key
+# )
 
 # Vector DB Setup (ChromaDB)
 # Persistent storage for embeddings
-chroma_client = chromadb.PersistentClient(path="./chroma_db")
-google_ef = embedding_functions.GoogleGenerativeAiEmbeddingFunction(api_key=apiKey, model_name="models/gemini-embedding-001")
+chroma_client = chroma_client
+google_ef = google_ef
 
 
 

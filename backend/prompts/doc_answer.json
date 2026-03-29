@@ -1,7 +1,0 @@
-{
-  "template": "Follow this plan:\n{thinking}\n\nAnswer ONLY from context.\n\nCONTEXT:\n{context}\n\nQUESTION:\n{query}\n\nUse citations like [filename, pg X]"
-}
-
-
-
-
