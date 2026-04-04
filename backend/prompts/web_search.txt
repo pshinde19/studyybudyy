@@ -1,3 +1,11 @@
 Give latest answer with references from web.
-Question:
-{query}
+Question: {query}
+ANSWER format:
+{{
+    "answer":"summarize web search answer...."
+    "citations":[weburl1,weburl2...]
+}}
+
+Note:
+1)get only two web reference.
+

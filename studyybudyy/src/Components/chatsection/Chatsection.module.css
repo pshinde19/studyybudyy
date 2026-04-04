@@ -14,8 +14,9 @@
     color: var(--color-slate-700);
     font-size: 16px;
     font-weight: 400;
-    padding: 20px;
+    padding: 10px;
     border-bottom: 1px solid var(--color-slate-200);
+    line-height: 45px;
 }
 
 .userinputbox{
@@ -26,9 +27,11 @@
     margin: 10px;
     border: 1px solid lightgray;
     border-radius: 10px;
+    overflow: hidden;
 }
 .usertextareabox{
     flex: 1;
+    display: flex;
 }
 
 .textarea{

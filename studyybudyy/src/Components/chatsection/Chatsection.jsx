@@ -18,7 +18,7 @@ const Chatsection = () => {
         </div>
         <div className={`${style['userinputbox']}`}>
            <div className={`${style['usertextareabox']}`}>
-               <textarea rows={2} name="" id="" className={`${style['textarea']}`}></textarea>
+               <textarea rows={2} name="Userinput" id="Userinput" className={`${style['textarea']}`}></textarea>
            </div>
            <div className={`${style['micbox']}`}>
                 <Mic size={20} color="#f90101" strokeWidth={2} />

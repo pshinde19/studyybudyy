@@ -7,15 +7,23 @@ import { useSelector ,useDispatch} from 'react-redux';
 
 
 const Sidebar = () => {
+    console.log('re-render');
+    
     const [isuploadComp,setisuploadComp]=useState(false)
+    const Collections = useSelector((state) => state.metadata.collection)
+    const currentCollection = useSelector((state) => state.metadata.currentSelectedcollection)
+    
+    console.log(Collections);
     function UploadDocument(){
-       console.log('clicked');
        setisuploadComp(true)
     }
-    const Collections = useSelector((state) => state.metadata.collection)
-    const dispatch=useDispatch()
-    console.log(Collections);
+
+    const[currentSelectedCollection,setcurrentSelectedCollection]=useState(Collections[0])
+    console.log(currentCollection,Collections,'currentSelectedCollection',currentSelectedCollection);
     
+    function setCurrentCollection(collection){
+        setcurrentSelectedCollection(collection)
+    }
 
     return (
         <div className={`${style['sidebar-continer']}`}>
@@ -43,8 +51,9 @@ const Sidebar = () => {
                         <ul className={`${style['document-list-ul']}`}>
                             {Collections.length == 0 && <div className={`${style['nocollection']}`}>No Collection</div>}
                             {Collections.length > 0 && Collections.map((value,idx,arr)=>{
+                                console.log(value,currentSelectedCollection);
                                 
-                                return <li key={crypto.randomUUID()} className={`${style['document-list-li']} ${idx==0?"active":''}`}>
+                                return <li onClick={e=>setCurrentCollection(value)} key={crypto.randomUUID()} className={`${style['document-list-li']} ${value==currentSelectedCollection?"active":''}`}>
                                             <div className={`${style['document-list-name']}`}>
                                                 <div className='flex gap-2 items-center'>
                                                     <BookMarked size={16} color="#9400d3" strokeWidth={2}/>

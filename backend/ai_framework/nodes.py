@@ -57,6 +57,7 @@ class GraphState(TypedDict):
     query: str
     filename: str
     user_id:str
+    description:str
     user_name:str
     messageId: str
     is_valid: bool
@@ -89,7 +90,8 @@ def validate_question(state: GraphState):
     with open(file_path, "r") as f:       
             template = f.read()
     prompt = template.format(
-        query=state["query"]
+        query=state["query"],
+        description=state["description"]
     )
     # print(prompt)
     # print("*"*10)
@@ -101,7 +103,6 @@ def validate_question(state: GraphState):
 
 
 def thinking_steps(state: GraphState):
-    # print('state["query"]',state["query"])
     file_path = os.path.join(parent_dir,'prompts', 'thinking.txt')
     with open(file_path, "r") as f:       
             template = f.read()

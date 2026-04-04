@@ -1,3 +1,6 @@
-Generate 3 follow-up questions.
-Question:
-{query}
+Generate 3 follow-up questions based on Question provided.
+Question: {query}
+ANSWER format:
+{{
+    "questions":[question1,question2,question3]
+}}

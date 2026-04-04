@@ -5,7 +5,11 @@ CONTEXT:
 {context}
 
 QUESTION:{query}
-Use citations like [filename, pg X]
+ANSWER format:
+{{
+    "answer":"summaized answer....."
+    "citations":[filename page X ,filename, pg y...]
+}}
 
 
 

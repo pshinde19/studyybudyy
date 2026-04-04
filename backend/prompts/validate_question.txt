@@ -6,4 +6,5 @@ Reject:
 - incomplete phrases
 Respond ONLY with:
 VALID or INVALID
-Input: {query}
+User input: {query}
+Document description : {description}
