@@ -8,11 +8,11 @@ const mainSlice = createSlice({
   initialState: intialstate,
   reducers: {
      updateCollection: (state, action) => {
-      console.log(action);
+      // console.log(action);
       state.collection =[...state.collection,...action.payload.collections]
     },
     updateCurrentCollection:(state, action) => {
-      console.log(action);
+      // console.log(action);
       state.currentSelectedcollection =action.payload.currentSelectedcollection
     }
   }

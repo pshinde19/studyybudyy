@@ -1,0 +1,49 @@
+[
+    {
+        "key": "validate",
+        "output": {
+            "is_valid": true,
+            "messageId": "1234"
+        }
+    },
+    {
+        "key": "thinking",
+        "output": {
+            "content": "### RAG Planning Protocol for \"whats benifits of using react over angular js?\"\n1. **Analyze & Query**: Identify key concepts.\n2. **Retrieve**: Perform semantic search.\n3. **Augment & Generate**: Combine context for response.",
+            "used_tokens": 54,
+            "prompt_tokens": 562,
+            "total_tokens": 616,
+            "messageid": "1234"
+        }
+    },
+    {
+        "key": "retrive_document",
+        "output": {
+            "content": "{\n    \"answer\": \"React offers several benefits, including improved performance through its virtual DOM, a component-based architecture for modular development, and strong community support. Additionally, React provides features like JSX for describing UI components and context for passing data through the component tree without manual prop passing.\",\n    \"citations\": [\"reactaa.pdf, Page 2\", \"reactaa.pdf, Page 7\"]\n}",
+            "used_tokens": 82,
+            "prompt_tokens": 484,
+            "total_tokens": 566,
+            "messageid": "1234"
+        }
+    },
+    {
+        "key": "websearch",
+        "output": {
+            "content": "{\n    \"answer\": \"React offers better performance, simplicity, and flexibility than Angular JS.\",\n    \"citations\": [\"https://www.geeksforgeeks.org/\", \"https://www.freecodecamp.org/\"]\n}",
+            "used_tokens": 47,
+            "prompt_tokens": 115,
+            "total_tokens": 162,
+            "messageid": "1234"
+        }
+    },
+    {
+        "key": "suggest_questions",
+        "output": {
+            "content": "{\n    \"questions\": [\n        \"How does React's virtual DOM compare to AngularJS's two-way data binding in terms of performance?\",\n        \"What are some examples of large-scale applications that have successfully migrated from AngularJS to React, and what were the benefits of doing so?\",\n        \"In what scenarios would you recommend using React over AngularJS for a new project, and what are the key factors to consider when making this decision?\"\n    ]\n}",
+            "used_tokens": 92,
+            "prompt_tokens": 78,
+            "total_tokens": 170,
+            "messageid": "1234"
+        }
+    }
+]

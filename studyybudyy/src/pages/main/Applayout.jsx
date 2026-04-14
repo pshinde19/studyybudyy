@@ -9,7 +9,7 @@ import { updateCollection,updateCurrentCollection } from '../../features/MainSli
 
 
 const Applayout = () => {
-  console.log('Refreshed rendering'); 
+  console.log('Applayout rendering'); 
   const dispatch = useDispatch();
    useEffect( ()=>{
    // Define the async function
@@ -17,9 +17,9 @@ const Applayout = () => {
         try {
             // Use 'await' to wait for the promise to resolve
             const response = await Api.get('getmetadata');
-            console.log(response); // Axios wraps the result in a 'data' object
+            // console.log(response); // Axios wraps the result in a 'data' object
             if(response){
-              console.log(response.data.files);
+              // console.log(response.data.files);
                let collections= dispatch(updateCollection({collections:response.data.files}))
                dispatch(updateCurrentCollection({currentSelectedcollection:response.data.files[0]}))
             }

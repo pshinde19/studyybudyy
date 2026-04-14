@@ -61,3 +61,15 @@
     align-items: center;
     justify-content: center;
 }
+
+.userquestion{
+    background-color: var(--color-blue-100);
+    padding: 10px;
+    margin: 5px 19px;
+    text-align: right;
+    display: block;
+}
+
+.messageBoxParent{
+    flex: 1;
+}

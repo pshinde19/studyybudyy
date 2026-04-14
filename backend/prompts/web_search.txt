@@ -3,9 +3,11 @@ Question: {query}
 ANSWER format:
 {{
     "answer":"summarize web search answer...."
-    "citations":[weburl1,weburl2...]
+    "citations":[weburl1,weburl2]
 }}
 
 Note:
 1)get only two web reference.
+2)try to adjust response in 100 tokens.
+3)form correct json in response
 

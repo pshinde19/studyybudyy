@@ -3,26 +3,23 @@ import style from './Sidebar.module.css'
 import { Plus ,History, CircleUserRound, Menu, BookMarked, CircleCheck} from 'lucide-react';
 import '../../App.css'
 import Upload from '../uploadbox/Upload';
-import { useSelector ,useDispatch} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateCurrentCollection } from '../../features/MainSlice';
 
 
 const Sidebar = () => {
-    console.log('re-render');
+    console.log('Sidebar re-render');
     
     const [isuploadComp,setisuploadComp]=useState(false)
     const Collections = useSelector((state) => state.metadata.collection)
     const currentCollection = useSelector((state) => state.metadata.currentSelectedcollection)
-    
-    console.log(Collections);
+    const dispatch=useDispatch()
+
     function UploadDocument(){
        setisuploadComp(true)
     }
-
-    const[currentSelectedCollection,setcurrentSelectedCollection]=useState(Collections[0])
-    console.log(currentCollection,Collections,'currentSelectedCollection',currentSelectedCollection);
-    
     function setCurrentCollection(collection){
-        setcurrentSelectedCollection(collection)
+        dispatch(updateCurrentCollection({currentSelectedcollection:collection}))
     }
 
     return (
@@ -51,9 +48,7 @@ const Sidebar = () => {
                         <ul className={`${style['document-list-ul']}`}>
                             {Collections.length == 0 && <div className={`${style['nocollection']}`}>No Collection</div>}
                             {Collections.length > 0 && Collections.map((value,idx,arr)=>{
-                                console.log(value,currentSelectedCollection);
-                                
-                                return <li onClick={e=>setCurrentCollection(value)} key={crypto.randomUUID()} className={`${style['document-list-li']} ${value==currentSelectedCollection?"active":''}`}>
+                                return <li onClick={e=>setCurrentCollection(value)} key={crypto.randomUUID()} className={`${style['document-list-li']} ${value==currentCollection?"active":''}`}>
                                             <div className={`${style['document-list-name']}`}>
                                                 <div className='flex gap-2 items-center'>
                                                     <BookMarked size={16} color="#9400d3" strokeWidth={2}/>

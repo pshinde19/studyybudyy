@@ -14,7 +14,7 @@ from ai_framework.langgraphframe import build_graph
 from myutils.utilities import *
 
 app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*",async_mode="eventlet")
 app.secret_key = '123456' 
 
 # 1. Update CORS: allow_headers and supports_credentials are key
@@ -135,10 +135,6 @@ def upload_file():
 
 @socketio.on('start_stream')
 def handle_stream(data):
-    """
-    Expects data to contain 'query', 'filename', etc.
-    Example: socket.emit('start_stream', {'query': 'What is React?'})
-    """
     query = data.get("query", "")
     
     # Construct your input object
@@ -150,23 +146,36 @@ def handle_stream(data):
         "user_name": data.get("user_name", "pranay"),
         "description": "this pdf is about react javascript framework"
     }
-
-    emit('status', {'msg': '=== STREAMING START ==='})
-
+    print('input_obj',input_obj)
+    print("-"*10)
     try:
         # Stream from the graph
-        for step in graph.stream(input_obj):
-            for node, output in step.items():
-                # Emit each node's output to the client
-                # Use 'include_self=True' if you want the sender to receive it
-                emit('node_update', {
-                    "node": node,
-                    "output": output
-                })
+        # for step in graph.stream(input_obj):
+        #     for node, output in step.items():
+        #         # Emit each node's output to the client
+        #         # Use 'include_self=True' if you want the sender to receive it
+        #         print("-"*10)
+        #         actual_value = next(iter(output.values()))
+        #         print("node", node)
+        #         print('actual_value',actual_value)
+        #         emit('chunks', {
+        #             "node": node,
+        #             "output": actual_value,
+        #             "processCompleted": False
+        #         })
+        #         print('emited node',node)
+        #         # time.sleep(5)
         
-        emit('status', {'msg': '=== STREAMING COMPLETE ==='})
+        # 
+        with open('final_state.json', 'r') as f:
+            json_data = json.load(f)
+        for index, dictionary in enumerate(json_data):
+            # print(f"Item {index}: {dictionary}")
+            emit('chunks', dictionary)
+            
+        emit('response_end',{"processCompleted":True})
     except Exception as e:
-        emit('error', {'msg': str(e)})
+        emit('chunks', {'msg': str(e)})
     
 
 if __name__ == "__main__":

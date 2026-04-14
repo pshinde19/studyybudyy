@@ -65,7 +65,8 @@ class GraphState(TypedDict):
     context: str
     documents: List[str]
     metadata: List[Dict]
-    thinking: str
+    sanity_check:Dict
+    thinking: List[Dict]
     documentAnswer: List[Dict] 
     websearch: List[Dict]
     suggest_questions: List[str]
@@ -76,6 +77,7 @@ class GraphState(TypedDict):
 # ROUTER
 # -----------------------------
 def route_after_validation(state: GraphState):
+    print('state',state)
     if state["is_valid"]:
         return "thinking"
     else:
@@ -97,9 +99,13 @@ def validate_question(state: GraphState):
     # print("*"*10)
     response=run_llm(prompt)
     result = response.choices[0].message.content.strip()
+    print('validate_question llm',result)
     is_valid = result.upper().startswith("VALID")
-    result={"is_valid": is_valid}
-    return  result
+    state["is_valid"]=is_valid
+    result={"is_valid": is_valid,"messageId":state['messageId']}
+    return {
+        "sanity_check": result,"is_valid": is_valid
+    }
 
 
 def thinking_steps(state: GraphState):
