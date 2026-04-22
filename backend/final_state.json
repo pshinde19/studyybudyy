@@ -13,7 +13,7 @@
             "used_tokens": 54,
             "prompt_tokens": 562,
             "total_tokens": 616,
-            "messageid": "1234"
+            "messageId": "1234"
         }
     },
     {
@@ -23,7 +23,7 @@
             "used_tokens": 82,
             "prompt_tokens": 484,
             "total_tokens": 566,
-            "messageid": "1234"
+            "messageId": "1234"
         }
     },
     {
@@ -33,7 +33,7 @@
             "used_tokens": 47,
             "prompt_tokens": 115,
             "total_tokens": 162,
-            "messageid": "1234"
+            "messageId": "1234"
         }
     },
     {
@@ -43,7 +43,7 @@
             "used_tokens": 92,
             "prompt_tokens": 78,
             "total_tokens": 170,
-            "messageid": "1234"
+            "messageId": "1234"
         }
     }
 ]

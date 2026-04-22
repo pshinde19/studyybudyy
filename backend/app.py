@@ -150,29 +150,29 @@ def handle_stream(data):
     print("-"*10)
     try:
         # Stream from the graph
-        # for step in graph.stream(input_obj):
-        #     for node, output in step.items():
-        #         # Emit each node's output to the client
-        #         # Use 'include_self=True' if you want the sender to receive it
-        #         print("-"*10)
-        #         actual_value = next(iter(output.values()))
-        #         print("node", node)
-        #         print('actual_value',actual_value)
-        #         emit('chunks', {
-        #             "node": node,
-        #             "output": actual_value,
-        #             "processCompleted": False
-        #         })
-        #         print('emited node',node)
-        #         # time.sleep(5)
-        
-        # 
-        with open('final_state.json', 'r') as f:
-            json_data = json.load(f)
-        for index, dictionary in enumerate(json_data):
-            # print(f"Item {index}: {dictionary}")
-            emit('chunks', dictionary)
-            
+        for step in graph.stream(input_obj):
+            for node, output in step.items():
+                # Emit each node's output to the client
+                # Use 'include_self=True' if you want the sender to receive it
+                print("-"*10)
+                actual_value = next(iter(output.values()))
+                print("node", node)
+                print('actual_value',actual_value)
+                actual_value['key']=node
+                emit('chunks', {
+                    "node": node,
+                    "output": actual_value,
+                    "processCompleted": False
+                })
+                print('emited node',node)
+                socketio.sleep(5)
+        # with open('final_state.json', 'r') as f:
+        #     json_data = json.load(f)
+        # for index, dictionary in enumerate(json_data):
+        #     dictionary['messageId']=input_obj['messageId']
+        #     print(f"Item {index}: {dictionary}")
+        #     print("="*20)
+        #     emit('chunks', dictionary)
         emit('response_end',{"processCompleted":True})
     except Exception as e:
         emit('chunks', {'msg': str(e)})

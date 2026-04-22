@@ -36,7 +36,7 @@ def run_llm(prompt):
         model=MODEL,
         messages=[{"role": "user", "content": prompt}],
         temperature=0,
-        max_tokens=100
+        max_tokens=300
     )
     return response
 
@@ -122,7 +122,7 @@ def thinking_steps(state: GraphState):
     'used_tokens':response.usage.completion_tokens,
     'prompt_tokens':response.usage.prompt_tokens,
     'total_tokens':response.usage.total_tokens,
-    'messageid':state["messageId"]
+    'messageId':state["messageId"]
     }
     return {
         "thinking": result
@@ -184,7 +184,7 @@ def generate_answer(state: GraphState):
     'used_tokens':response.usage.completion_tokens,
     'prompt_tokens':response.usage.prompt_tokens,
     'total_tokens':response.usage.total_tokens,
-    'messageid':state["messageId"]
+    'messageId':state["messageId"]
     }
     return {"documentAnswer":result}
 
@@ -206,7 +206,7 @@ def websearch(state: GraphState):
     'used_tokens':response.usage.completion_tokens,
     'prompt_tokens':response.usage.prompt_tokens,
     'total_tokens':response.usage.total_tokens,
-    'messageid':state["messageId"]
+    'messageId':state["messageId"]
     }
     return {"websearch":result}
 
@@ -228,7 +228,7 @@ def suggest_questions(state: GraphState):
     'used_tokens':response.usage.completion_tokens,
     'prompt_tokens':response.usage.prompt_tokens,
     'total_tokens':response.usage.total_tokens,
-    'messageid':state["messageId"]
+    'messageId':state["messageId"]
     }
     return {"suggest_questions":result}
 

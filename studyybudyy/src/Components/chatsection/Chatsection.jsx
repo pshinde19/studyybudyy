@@ -18,17 +18,19 @@ const Chatsection = () => {
   );
   // With these two:
   const historicalMessages = useSelector(
-    (state) => state.chat.messages.slice(0, -1), // all except last
+    (state) =>  state.chat.lastMessageId?state.chat.messages.slice(0, -1):state.chat.messages , // all except last 
     // Prevents re-render when only last message changes
     (prev, next) => prev.length === next.length
   );
-
+  console.log('historicalMessages',historicalMessages);
+  
   const lastMessageId = useSelector((state) => state.chat.lastMessageId);
   
   
   const socketRef = useRef(null);
   const inputRef = useRef(null); // Ref for the textarea to avoid re-renders
-  const heartbeatRef = useRef(null); // Use ref for timer to avoid closure issues
+ 
+  
 
   const [status, setStatus] = useState("idle"); // idle | sending | streaming | completed | error
  
@@ -36,91 +38,15 @@ const Chatsection = () => {
   const handleFailure = (reason) => {
     console.log(`⚠️ Failure: ${reason}`);
     setStatus("error");
-    if (heartbeatRef.current) clearTimeout(heartbeatRef.current);
+   
     disconnectSocket();
   };
 
-  const resetHeartbeat = (timeoutMs) => {
-    if (heartbeatRef.current) clearTimeout(heartbeatRef.current);
-    heartbeatRef.current = setTimeout(() => {
-      handleFailure(timeoutMs === 20000 ? "Initial connection timeout" : "Stream stalled");
-    }, timeoutMs);
-  };
 
-  
   useEffect(() => {
-    
     // if (status !== "sending") return;
-    
-    socketRef.current = connectSocket();
-    const s = socketRef.current;
-
-    // ⏱ Start initial timeout
-    resetHeartbeat(20000);
-
-    s.on("connect", () => {
-      let messageId=crypto.randomUUID();
-      let currentVal=inputRef.current.value;
-      let data={
-      "messageId":messageId,
-      "key":"user",
-      "payload": { "key":"question",
-                 "content":currentVal
-              }
-    }
-    dispatch(updateNodeData(data))
-    let inputObj={
-        "query": currentVal,
-        "filename": "reactaa.pdf",
-        "messageId": messageId,
-        "user_id":  "21a1ff59-f04b-450e-bf46-322617dae796",
-        "user_name": "pranay",
-        "description": "this pdf is about react javascript framework"
-    }
-    s.emit("start_stream", inputObj);
-    });
-
-    s.on("chunks", (chunk) => {
-      console.log(chunk);
-      console.log(chunk.output.messageId);
-      
-      let data={
-          "messageId":chunk.output.messageId,
-          "key":"bot",
-          "payload": chunk.output
-        }
-      console.log('updating bot response');
-      dispatch(updateNodeData(data))
-      resetHeartbeat(10000); // Reset "stalled" timer
-      setStatus("streaming");
-    });
-
-    s.on("response_end", (chunk) => {
-      console.log('response_end', chunk);
-      console.log("✅ Stream finished");
-      if (heartbeatRef.current) clearTimeout(heartbeatRef.current);
-      setStatus("completed");
-      disconnectSocket();
-    });
-
-    s.on("connect_error", (err) => {
-      handleFailure(err.message);
-    });
-
-    s.on("disconnect", (reason) => {
-      if (reason !== "io client disconnect") {
-        handleFailure(reason);
-      }
-    });
-
-    // Clean up listeners on unmount or if status changes away from sending/streaming
     return () => {
-      if (heartbeatRef.current) clearTimeout(heartbeatRef.current);
-      s.off("connect");
-      s.off("chunks");
-      s.off("response_end");
-      s.off("connect_error");
-      s.off("disconnect");
+      
     };
   }, [status === "sending"]); //  
 
@@ -136,13 +62,63 @@ const Chatsection = () => {
   
     console.log('Sending message:', currentVal);
     setStatus("sending");
-    inputRef.current.value = ""; // Clear the UI manually
+    socketRef.current = connectSocket();
+    const s = socketRef.current;
+    s.on("connect", () => {
+      let messageId=crypto.randomUUID();
+      let currentVal=inputRef.current.value;
+      console.log('currentVal',currentVal);
+      
+      let data={"messageId":messageId,"key":"user","payload": { "key":"question","content":currentVal}}
+      dispatch(updateNodeData(data))
+      inputRef.current.value = ""; // Clear the UI manually
+      let inputObj={
+          "query": currentVal,
+          "filename": "reactaa.pdf",
+          "messageId": messageId,
+          "user_id":  "21a1ff59-f04b-450e-bf46-322617dae796",
+          "user_name": "pranay",
+          "description": "this pdf is about react javascript framework"
+      }
+      s.emit("start_stream", inputObj);
+    });
+
+    s.on("chunks", (chunk) => {
+      console.log(chunk);
+     
+      let data={
+          "messageId":chunk.output.messageId,
+          "key":"bot",
+          "payload": chunk.output
+        }
+      console.log('updating bot response');
+      dispatch(updateNodeData(data))
+      setStatus("streaming");
+    });
+
+    s.on("response_end", (chunk) => {
+      console.log('response_end', chunk);
+      console.log("✅ Stream finished");
+      setStatus("completed");
+      disconnectSocket();
+    });
+
+    s.on("disconnect", (reason) => {
+      if (reason !== "io client disconnect") {
+        handleFailure(reason);
+      }
+      s.off("connect");
+      s.off("chunks");
+      s.off("response_end");
+      s.off("connect_error");
+      s.off("disconnect");
+    });
+
   };
 
   const stopStream = () => {
     console.log("🛑 Stopping stream...");
     disconnectSocket();
-    if (heartbeatRef.current) clearTimeout(heartbeatRef.current);
     setStatus("idle");
   };
 
@@ -157,9 +133,9 @@ const Chatsection = () => {
       {/* 💬 Message Section */}
       <div className={style['messageBoxParent']}>
         {historicalMessages.map((msg) => (
-          <Allmessage key={msg.messageId} msg={msg} />
+           <Allmessage key={msg.messageId} msg={msg} />
         ))}
-        <LastMessage />   {/* Only this re-renders on every chunk */}
+        <LastMessage />   {/*  Only this re-renders on every chunk */}
       </div>
 
       {/* 📝 Input Section */}
